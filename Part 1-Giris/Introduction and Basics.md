@@ -55,7 +55,7 @@ compiler instructionları makine koduna çevirerek çalıştırır.
 
 * C++ bunların yanı sıra data ve instructionun bir arada bulunduğu *class* yapısına da sahiptir. Bu, nesneye dayalı programlama tekniğinin getirdiği bir özelliktir.
 
-![Program Organization](https://github.com/UmutGzl/CppNotebook/Part 1-Giris/imgsrc/CppOrg.png)
+![Program Organization]('https://github.com/UmutGzl/CppNotebook/Part'+'1-Giris/imgsrc/CppOrg.png')
 
 ## 2)Program Yazımının Temelleri
 
