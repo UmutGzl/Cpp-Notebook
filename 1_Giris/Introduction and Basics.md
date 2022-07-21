@@ -499,7 +499,73 @@ int data_list[3];
 burada data_list adlı dizinin 3 tane elemanı vardır.
 Bir dizinin içerisindeki elemanlara erişmenin yolu index(indisler)dir.
 C++ dilinde dizi inidsleri 0 dan başlar. Yani yukarıda tanımlanan dizinin son elemanı data_list[2] dir.
-Köşeli parantezlere 
+Köşeli parantezlerle eleman belirtmeye "referencing" de denir.
+
+Dizilerin kullanımı için ufak bir ortalama bulma örneği:
+```cpp
+#include <iostream.h>
+
+main (){
+	float data[5]; 
+	float total;
+	float average;
+
+	data[0] = 34.0;
+	data[1] = 27.0;
+	data[2] = 46.5;
+	data[3] = 82.0;
+	data[4] = 22.0;
+	total = data[0] + data[1] + data[2] + data[3] + data[4];
+	average = total / 5.0;
+	cout << "Total "<< total << " Average " << average << '\n';
+	return (0);
+}
+```
+
+Program çıktısı: Total 211.5 Average 42.3
+
+### 5.2- String
+Karakter dizilerine string denir.
+Her string *'\0(NUL)'* karakteri ile biter. Bilgisayar Stringin bitişini bu karakterden anlar.
+(Bu karakter kullanıcıya gözükmez veya tanımlama,atama yaparken konulmaz.)
+
+Örnek:
+```cpp
+main(){
+	char name[5];
+	
+	name[0]='U';
+	name[1]='m';
+	name[2]='u';
+	name[3]='t';
+	name[4]='\0';
+	
+	return 0;
+}
+```
+* Stringler çift tırnak(") içerisinde kullanılabilir.
+
+* String tipi değişkenlere atama yapmak için C/C++ özelinde = operatörü kullanılamaz. Çünkü string aslında bir dizidir.
+Bu nıktada string.h kütüphansindeki *strcpy()* kullanılır.
+
+```cpp
+name = "Umut";  // Illegal
+
+strcpy(name, "Umut"); //Legal
+```
+
+Bazı string fonksşyonları:
+|Fonksiyon|Açıklama|
+|---------|--------|
+|strcpy(str1,str2)|str2 deki içerigi str1 e kopyalar|
+|strcat(str1,str2)|str2 yi str1 in sonuna ekler|
+|length= strlen(str)|stringin uzunluğunu dönderir|
+|strcmp(str1,str2)| str1 ile str2 aynı ise 0, değilse 0 dışında bir sayı döndürür|
+
+
+### 5.3- Veri Okuma:
+
+
 
 
 
