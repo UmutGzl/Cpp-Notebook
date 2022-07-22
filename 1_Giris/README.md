@@ -1,4 +1,4 @@
-1) C++ Dili Nedir?
+## 1) C++ Dili Nedir?
 C++, esnek ve yüksek seviyeli bir programlama dilidir. Çıkış tarihi olan 1980'den beri firmware(donanım yazılımı), mikrodenetleyiciler, işletim sistemleri, uygulamalar ve grafik programlama gibi alanlarda kullanılır. Hızlı ve verimli bir dil olarak bilinir.
 
 #### Tarihi: 
