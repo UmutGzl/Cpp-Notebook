@@ -1,4 +1,4 @@
-## <span style="color:red"> 1) C++ Dili Nedir?</span>
+1) C++ Dili Nedir?
 C++, esnek ve yüksek seviyeli bir programlama dilidir. Çıkış tarihi olan 1980'den beri firmware(donanım yazılımı), mikrodenetleyiciler, işletim sistemleri, uygulamalar ve grafik programlama gibi alanlarda kullanılır. Hızlı ve verimli bir dil olarak bilinir.
 
 #### Tarihi: 
@@ -565,7 +565,112 @@ Bazı string fonksşyonları:
 
 ### 5.3- Veri Okuma:
 
+cin nesnesinden daha önceki bölümlerde bahsetmiştik.
+Aynı coutdaki gibi cinde de birden çok input alma imkanımız vardır.
 
+```cpp
+cin>>id>>price;
+```
+
+id ve price değişkenlerine birer sayı okur. Giriş yaparken aralarına bir boşluk koymamız gerekmektedir.
+
+Örnek input:  123 1000
+
+###### NOT: C++ input esnasında oluşabilecek sorunları azaltmak ve işleri kolaylaştırmak için sayı girmeden yanlışlıkla <enter>a bastığımızda hata vermek yerine siz sayı girene kadar bekler.
+
+
+cin nesnesinin klasik kullanılışı int, float ve char gibi değişkenlerde sorunsuz çalışmaktadır. Ancak stringleri okumak daha komplike bir şeydir. Tek kelimelik stringler klasik kullanımda sorun çıkarmayabilir ancak yine de string okurken yine de şu şekilde okumalıyız:
+
+```cpp
+char name[100];
+cin.getline(name, sizeof(name));
+```
+getline fonksiyonu kullanılarak bir satır girdi alınır ve alınan stringin boyutu döndürülür.
+
+### 5.4- Initializing Variables:
+* C++ dili tanımlama sırasında ilklendirme yapmaya izin verir. Bu noktada kendi stilinin yanında C'nin de stilini destekler:
+
+```cpp
+int counter(0);
+int counter =0;
+
+```
+
+* Array yapısı da değişkenler gibi ilklendirilebilir. İlklendirme yaparken elemanlar süslü parantez içerisinde kullanılır.
+```cpp
+int product_codes[3] = {10, 972, 45);
+```
+
+eğer köşeli parantez içerisinde boyut verilmez ise C++ girilen eleman sayısına göre boyutu kendi atar.
+```cpp
+int product_codes[] = {10, 972, 45);
+```
+
+* Benzer mantıkla stringler de oluşturulabilir ancak karakter karakter giriyorsak son elemana \0 eklemeyi unutmayalım
+
+
+### 5.5- Çok boyutlu diziler:
+
+Dizilerin dizisi şeklinde de söyleyebiliriz.
+İki boyutlu bir diziyi ele alırsak
+```cpp
+int mat[4][3]
+```
+şeklinde tanımlanır.
+
+![matrix](https://cdn.programiz.com/sites/tutorial2program/files/cpp-two-dimensional-array.png)
+
+
+### 5.6-Integer Tipleri:
+C++ dilinin donanıma yakın bir seviede bulunması ve donanım ile etkilesime belli bir yere kadar izin vermesi bakımından orta seviyede yer aldığını söyleyebiliriz. Bu özelliğinden dolayı kaynak kullanımını daha rahat kontrol edebiliriz.
+
+Integer veri tipinin başına gelen bazı specifierlar integerin yapısını değiştirir ve bu specifierlar bir arada kullanılabilir:
+
+* short ve long specifierları: short integerin daha az yer kapmamasını; long ise daha fazla yer kaplayarak daha büyük sayıları ifade etmesini sağlar.
+
+* Normalde İnteger ifadeler negatif sayıları da kapsar. Ancak işaret bitini devreden çıkararak sadece pozitif sayıları göstermesini sağlayarak aynı boyutta daha yüksek değerli bir pozitif sayı tutmasını sağlayabiliriz.
+signed 1 byte: -128 to 127
+unsigned 1 byte: 0 to 255
+
+NOT: char tipinin de ascii tablosundan yola çıkacak olursak çok küçük bir integer oldugunu söyleyebliriz.
+
+### 5.7- Double Tipleri:
+Integerlarda bulunan durumun benzeri float tipinde de geçerlidir. Ancak bunda olay limit büyüklüğünden çok virgülden sonra kaç basamak gösterildiğidir. Daha hassas bir işlem yapmak için double tipini kullanabiliriz.
+
+float: 4 byte
+double: 8 byte
+
+* Floating sayılar her zaman signed türündedir.
+* long double gibi bir ifade ile double da genişletilebilir.
+
+### 5.8- Sabit(constant) ve referans tanımı:
+Değişmeyecek bşr değeri tanımlamak için sabitler kullanılır. Mesela pi değeri sabittir. 
+
+Tanım için const keywordu kullanılır:
+```cpp
+const float PI=3.1415;
+```
+
+sadece ilklendirirken değer ataabilir,sonrasında içindeki değer değiştirilemez.
+
+Bir diğer özel değişken tipi ise referanstır. 
+```cpp
+int count;
+int &actual_count = count;
+```
+actual_count ve count aynı değişkeni ifade eder. Birinin diğerinden referans aldığını söyleybiliriz.
+Şu an kullanılması anlamsız gelse de fonksiyonlar ve scope kavramı hayatımıza girdiğinde daha anlamlı ve kullanışlı bir yapı haline gelecektir.
+
+### 5.9- Qualifers:
+İnteger ve float kısmında bahsedilen qualifierlar ve daha fazlasının tablosu aşağıda verilmiştir:
+
+|Qualifier Type|Qualifiers|
+|:------------:|:--------:|
+|Special|Volatile|
+|Class|register, static, extern, auto|
+|Size|long, short, double|
+|Sign| signed, unsigned|
+|Type|int, float, char|
 
 
 
