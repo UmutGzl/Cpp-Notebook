@@ -692,6 +692,7 @@ if(condition){
 ```
 * condition ifadeler true veya false olarak değer döndürür. Bu ifadeler kurulurken de İlişkisel operatörler kullanılır(<=,<,>,...)
 * Birden çok condition ifadesini mantıksal operatörler iel birleştirmek mümkündür:
+
 |Operatör|Kullanım|Anlamı|
 |--------|--------|------|
 |Logical AND(&&)|(expr1)&&(expr2)|iki koşul da doğruysa TRUE döndürür|
