@@ -856,9 +856,50 @@ int main(){
 }
 
 ```
-
 * bir sayının 0 a bölümü hata vereceğinden döngünün bu kısmını atlıyoruz
 
+## 7)Programming Process:
+
+Bir program sadece kod yazmakla oluşmaz. Her yazılımın bir yaşam döngüsü vardır. Bir yazılım doğar, gelişir, olgunlaşır ve ölür. Öldüğü noktada da yerine yeni ve güncel bir yazılım konulur.
+
+Yazılım geliştirme sürecinde en çok zaman harcanan nokta ise sıfırdan kod yazmak değil, kodda değişiklik yapmak ve debug sürecidir. Aynı zamanda yazılan programlan dökümante edilmeli, bakımı yapılmalı, gerektiğinde iyileştirmeler ve geliştirmeler yapılmalı.
+
+Büyük bir programın yazıl aşamaları şunlardır:
+	* Requirements/Gereklilik: Programdan ne bekleneceğinin belirlendiği aşamadır.
+	* Specification: Programın neler yapacağı "Preliminary Specification" ile belirlenir. Daha sonra programın hatları belirlendiğinde asıl Specification dökümanı hazırlanır. 
+	* Code Design/Kod Tasarımı: Programın genel tasarımı yapılır. Kullanılan algoritmalar belirlenir, sınıf diyagramları, dosya formatları ve veri yapıları gibiparçalar tasaranır.
+	* Kodlama: Programın yazıldığı aşama
+	* Test: Her programın test edilmesi önemlidir. Yazdığımız programı  test etmeliyizz. Hatta mümkünse başkasına test ettirmeliyiz.
+	* Debugging: Çok az program ilk seferinde çalışır. Test ederken bulduğumuz hataları düzeltmeli ve tekrar test etmeliyiz.
+	* Release: Programın paketlenip dökümante edilip kullanıma sunulduğu aşamadır.
+	* Maintenance/Bakım: Kullanıma sürüldükten sonra oluşan hataların düzeltilmesi.
+	* Updating/Güncelleme: Kullanıcılar değişiklik ve yenilikler bekleyebilir. Mesela daha hızlı ve isabetli algoritmaların kullanılması, varsa arayüz güncellemeleri, yeni özellikler... Bu noktada Spesifikasyon aşamasından itibaren süreç tekrarlanır.
+
+###### *"think before you act"*
+
+![Src: Francisco's Blog](https://fthegeniushome.files.wordpress.com/2019/08/artboard-1402x.png)
 
 
+### The Makefile:
+Şu ana kadar compile etme işleminin hep elle yaptık. Ancak özellikle daha büyük ölçekli, çok modüllü programlarda bu işlemin elle yapılması imkansıza yakındır. UNIX sistemlerde ve Turbo-C++'da *make* adı verilen bir hizmet mevcuttur. Compile işleminin yürütümünü sağlayan yapı kurmamıza olanak verir. Detaylarından daha sonra bahsedilecektir ama basit bir calculator programının compile işlemini yürüten makefile kodu aşağıda verilmiştir: 
 
+```sh
+[File: calcl/makefile.unx]
+#
+# Makefile for many UNIX compilers using the
+# "standard" command name CC
+#
+CC=CC
+CFLAGS=-g
+all: calc
+calc: calc.cc
+Page 104
+$(CC) $(CFLAGS) -o calc calc.cc
+clean:
+rm calc
+```
+
+programın compile edilmesi için *make* komutunun çalıştırılması yeterlidir. 
+
+
+##### BİRİNCİ KISIM SONA ERMİŞTİR.
