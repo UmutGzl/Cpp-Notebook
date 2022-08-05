@@ -190,13 +190,137 @@ Scope ve storage class, tüm değişkenlerin sahip olduğu 2 özelliktir.
 	Global değişken ile aynı isimde bir local değişken tanımlamak mümkündür. Kendi buunduğu scope içerisinde Local değişken geçerlidir. 
 	![O'Reilly](https://www.oreilly.com/library/view/practical-c-programming/0596004192/httpatomoreillycomsourceoreillyimages55188.png) ![GeekForGeeks](https://media.geeksforgeeks.org/wp-content/cdn-uploads/Variable-scope-in-C.png)
 
-	-Storage Class kalıcı ya da geçici olabilir. Global değişkenler genellikle kalıcıdır ve programın sonuna kadar bellekte tutulurlar. Geçici değişkenler ise belleğin ***stack*** adı verilen bir yapıda tutulurlar. Çok fazla geçici değişken birikirse *stackoverflow
+	-Storage Class kalıcı ya da geçici olabilir. Global değişkenler genellikle kalıcıdır ve programın sonuna kadar bellekte tutulurlar. Geçici değişkenler ise belleğin ***stack*** adı verilen bir yapıda tutulurlar. Çok fazla geçici değişken birikirse *stackoverflow* hatası alınır. Geçici değişkenlere ayrılan bellekler kullanıldıkları blokların sonuna gelindiğinde geri kazanılır.
+
+|Değişken|Scope|Storage Class|İnitializing/Tanımlama|
+|--------|-----|-------------|----------------------|
+|Tüm blokların dışında|Global|Permanent|Once|
+|tüm blokların dışında *static* tanımlanmış|Global|Permanent|Once|
+|Bloğun içinde tanımlanmış|Local|Temporary|Her blokta|
+|Bloğun içinde *statik* tanımlanmış|Local|Permanent|Once|
 
 
+### 2.2. Fonksiyonlar:
+Fonksiyonlar, farklı veriler için tekrar tekrar yapacağımız işlemler gruplamak için bir araçtır. Şu ana kadarki örnek kodlarımızda da aslında fonksiyonlar mevcuttu. En bilinik fonksiyonumuz ***main()*** fonksiyonudur. 
+
+Main fonksiyonu özel bir fonksiyondur. Her programın bir main fonksiyonu olmak zorundandır ve programımız o fonksiyon ile çalışmala başlar. Tüm fonksiyonlar direkt ya da dolaylı olarak main fonksiyonundan çağırılır.
+
+fonksiyonun elemanları:
+	- ***isim***
+	- ***Parametreler***
+	- ***Dönüş değeri/Return Value***
+
+```cpp
+function_type function_name(PARAMETERS){
+	//codes
+	return value;
+}
+```
+
+Örnek:
+```cpp
+float triangle(float width, float height){
+	//codes
+	return value;
+}
+```
+
+* Yukarıdaki örnekte de olduğu gibi fonksiyona parametrenin değerini gönderme işlemine ***"call by value"*** denir. 
+
+* fonksionlar belirli bir açıdan değişkenlerle ortak bir özelliğe sahiptir. O da tanımlanma işlemidir. Fonksionları kullanmadan önce onları tanımlamış olmamız gerekiyor. Bunu yapmanın iki yolu vardır:
+		- Fonksyonu mainin üzerinde yazmak: Bu yöntem main fonksionunu en altta bıraktığı ve karışıklık yaratabildiği için düzen açısından tercih edilmez.
+		-Fonksiyon prototipi tanımlamak: Compiler'a fonksiyonu çağırması için yeterli bilgiyi verme işlemidir. fonksiyonu yazarken koyduğumuz ilk satırın neredeyse aynısıdır.
+			```cpp
+			float triangle(float width,float height);
+			```
+		aynı zamanda C ve C++ bize sadece parametrelerin tipiyle de prototipleme yapma imkanı sunar:
+			```cpp
+			float triangle(float,float);
+			```
+
+#### 2.2.1.Referans parametreler ve Return değerleri
+Fonksiyonları değişkenlerin değerine göre çağırdığımızda değişkenler üzerinde scope dışı bir değişiklik yapamayız. Eğer değişkene scope dışında da etki etmek istiyorsak değer üzerinden değil bellekteki adres değeri üzerinden işlem yapmalıyız. Buna ***call by referance*** denir.
 
 
+```cpp
+#include <iostream.h>
+
+void inc_counter(int &counter){
+	++counter;
+}
+
+main (){
+	int a_count = 0;
+	inc_counter(a_count);
+	cout << a_count << '\n';
+	return (0);
+}
+```
+referans tipler, parametrelerde kullanıldığı gibi return tipler için de kullanılabilir.
+ ```cpp
+ const int ARRAY_SIZE = 5
+// Size of the array
+int itemarray[ARRAY_SIZE] = {1, 2, 5000, 3, 4};
+
+int &biggest(void){
+	int index;
+	int biggest;
+	biggest = 0;
+	for (index = 1; index < ARRAY_SIZE; ++index){
+		if (item_array[biggest] < item_array[index])
+		biggest = index;
+	}
+	return (item_array[biggest]);
+}
+```
+ Eğer en büyük elemanı yazdırmak istersek:
+ ```cpp
+ int item_array[5] = {1, 2, 5000, 3, 4}; // An array
+cout << "The biggest element is "<<biggest(item_array, 5) << '\n';
+
+```
 
 
+##### Dangling Referances: Return by referance kullanırken dikkatli olmalıyız. Eğer dikkatli olmazsak artık var olmayan bir referansla karşılaşabiliriz.
 
+### 2.2.2. Dizi Parametreler
+C++ ın array ile olan ilişkisinin değişkenlerden farklı olduğunu biliyoruz. Öncelikle prototip tanımlamasında array boyutunu vermemiz gerekmediğini belirtmek isterim. 
 
+C++, fonksiyonlara array gönderirken adreslere dayalı "call by address" denilen bir şema kullanır. Bu şema tüm array parametrelerini referanslara dönüştürür. Böylece dizinin boyutu ne olursa olsun parametre olarak gönderim yapılabilir. Siz köşeli parantez içerisine sayı yazsanız dahi C++ onu yoksayar. Genelde bu durum sadece insanlar için uyarı oluşturmak amaçlı kullanılır.
 
+Çok boyutlu dizilerde ise son boyut dışında her boyuta sayı koymak zorundayız. Bunun sebebi ise C++ ın burada verdiğiniz sayılara göre diziyi algılayıp konumu ona göre belirlemesidir.
+```cpp
+int sum_matrix(int matrixl[10][10]);	//legal
+int sum_matrix(int matrixl[10][]);		//legal
+int sum_matrix(int matrixl[][]);		//illegal
+```
+
+### 2.2.3. Function Overloading
+* Aynı isimde iki tane fonksiyon tanımı yapabilir miyiz? C ve PASCAL gibi eski dillerde hayır ancak yeni nesil dillerde gelen bu özellik C++ta da mevcuttur. Örneğin bir alan bulma fonksiyonu için hem integer değer döndüren hem de float değer döndüren fonksiyon aynı isimde yazılabilir. Function Overloading dahilinde tek bir kısıt vardır o da fonksiyonların C++ tarafından ayırt edilebiliyor olması lazım. C++ bu ayrt etme işlemini parametreler üzerinden yapar. Bu sebeple parametreleri aynı olan veya parametre almayan iki fonksiyon birbiriyle Funtion Overloading yapamaz.
+
+İllegal:
+```cpp 
+int func();
+float func();
+```
+
+Legal:
+```cpp
+int func(int num);
+float func(float num);
+```
+
+Legal:
+```cpp
+int func(int num);
+int func(int num, int num2);
+```
+
+### 2.2.4. Default Parametreler
+Bir parametre fonksiyona gönderilmediğinde belirli bir kabul değeri almasını isteyebiliriz. Mesela scale gerektiren bir işlemde scale katsayısı verilmediğinde 1 kabul etmesini isteyebiliriz. Bu durumdayapacağımız şey diğer dillerdeki ile aynı mantıktadır.
+
+```cpp
+void draw(const rectangle &rectangle, double scale = 1.0);
+```
+
+default parametre her zaman sonda olmalıdır.
